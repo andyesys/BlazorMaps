@@ -1,6 +1,7 @@
 ﻿using FisSst.BlazorMaps.JsInterops.Events;
 using FisSst.BlazorMaps.JsInterops.Maps;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using System;
 using System.Reflection;
@@ -41,6 +42,9 @@ namespace FisSst.BlazorMaps
         private const string zoomIn = "zoomIn";
         private const string zoomOut = "zoomOut";
         private const string setZoomAround = "setZoomAround";
+        private const string fitBounds = "fitBounds";
+        private const string flyTo = "flyTo";
+        private const string flyToBounds = "flyToBounds";
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -72,9 +76,9 @@ namespace FisSst.BlazorMaps
             return await this.MapReference.InvokeAsync<int>(getMaxZoom);
         }
 
-        public async Task SetView(LatLng latLng)
+        public async Task SetView(LatLng latLng, int? zoom = null)
         {
-            await this.MapReference.InvokeAsync<IJSObjectReference>(setView, latLng);
+            await this.MapReference.InvokeAsync<IJSObjectReference>(setView, latLng, zoom, new { animate = true });
         }
 
         public async Task SetZoom(int zoom)
@@ -95,6 +99,25 @@ namespace FisSst.BlazorMaps
         public async Task SetZoomAround(LatLng latLng, int zoom)
         {
             await this.MapReference.InvokeAsync<IJSObjectReference>(setZoomAround, latLng, zoom);
+        }
+
+        public async Task FitBounds(LatLng[] bounds)
+        {
+            IJSObjectReference boundsParam = await this.JsRuntime.InvokeAsync<IJSObjectReference>("L.latLngBounds", bounds);
+            await this.MapReference.InvokeAsync<IJSObjectReference>(fitBounds, boundsParam, new { animate = true });
+            await boundsParam.DisposeAsync();
+        }
+
+        public async Task FlyTo(LatLng latLng, int zoom)
+        {
+            await this.MapReference.InvokeAsync<IJSObjectReference>(flyTo, latLng, zoom);
+        }
+
+        public async Task FlyToBounds(LatLng[] bounds)
+        {
+            IJSObjectReference boundsParam = await this.JsRuntime.InvokeAsync<IJSObjectReference>("L.latLngBounds", bounds);
+            await this.MapReference.InvokeAsync<IJSObjectReference>(flyToBounds, boundsParam);
+            await boundsParam.DisposeAsync();
         }
 
         public async Task OnClick(Func<MouseEvent, Task> callback)
