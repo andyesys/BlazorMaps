@@ -48,18 +48,7 @@ namespace FisSst.BlazorMaps
             {
                 this.MapReference = await this.MapJsInterop.Initialize(this.MapOptions);
                 this.MapEvented = new MapEvented(this.MapReference, this.EventedJsInterop);
-                initialized = true;
                 await this.AfterRender.InvokeAsync();
-            }
-        }
-
-        private bool initialized;
-
-        public async Task WaitForInitialize()
-        {
-            while (!initialized)
-            {
-                await Task.Delay(10);
             }
         }
 
