@@ -16,25 +16,25 @@ namespace FisSst.BlazorMaps
 
         public async Task<Path> Redraw()
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(RedrawJsFunction);
+            await JsReference.InvokeAsync<IJSObjectReference>(RedrawJsFunction);
             return this;
         }
 
         public async Task<Path> SetStyle(PathOptions options)
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(SetStyleJsFunction, options);
+            await JsReference.InvokeAsync<IJSObjectReference>(SetStyleJsFunction, options);
             return this;
         }
 
         public async Task<Path> BringToFront()
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(BringToFrontJsFunction);
+            await JsReference.InvokeAsync<IJSObjectReference>(BringToFrontJsFunction);
             return this;
         }
 
         public async Task<Path> BringToBack()
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(BringToBackJsFunction);
+            await JsReference.InvokeAsync<IJSObjectReference>(BringToBackJsFunction);
             return this;
         }
     }

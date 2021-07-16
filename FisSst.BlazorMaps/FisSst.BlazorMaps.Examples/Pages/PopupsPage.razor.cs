@@ -12,14 +12,14 @@ namespace FisSst.BlazorMaps.Examples.Pages
         private bool firstRender = true;
         private Marker marker1;
         private Marker marker2;
-        private MapOptions mapOptions;
+        private readonly MapOptions mapOptions;
 
         public PopupsPage()
         {
-            this.center = new LatLng(50.279133, 18.685578);
-            this.firstMarkerLatLng = new LatLng(50.284324, 18.664683);
-            this.secondMarkerLatLng = new LatLng(50.285495, 18.691064);
-            this.mapOptions = new MapOptions()
+            center = new LatLng(50.279133, 18.685578);
+            firstMarkerLatLng = new LatLng(50.284324, 18.664683);
+            secondMarkerLatLng = new LatLng(50.285495, 18.691064);
+            mapOptions = new MapOptions()
             {
                 DivId = "mapId",
                 Center = center,
@@ -42,50 +42,26 @@ namespace FisSst.BlazorMaps.Examples.Pages
         {
             if (firstRender)
             {
-                this.firstRender = false;
-                this.marker1 = await this.MarkerFactory.CreateAndAddToMap(this.firstMarkerLatLng, this.mapRef);
-                this.marker2 = await this.MarkerFactory.CreateAndAddToMap(this.secondMarkerLatLng, this.mapRef);
+                firstRender = false;
+                marker1 = await MarkerFactory.CreateAndAddToMap(firstMarkerLatLng, mapRef);
+                marker2 = await MarkerFactory.CreateAndAddToMap(secondMarkerLatLng, mapRef);
             }
         }
 
-        private async Task BindPopup()
-        {
-            await this.marker1.BindPopup("Hi! This is a popup");
-        }
+        private async Task BindPopup() => await marker1.BindPopup("Hi! This is a popup");
 
-        private async Task BindTooltip()
-        {
-            await this.marker2.BindTooltip("And this is a tooltip");
-        }
+        private async Task BindTooltip() => await marker2.BindTooltip("And this is a tooltip");
 
-        private async Task RemovePopup()
-        {
-            await this.marker1.UnbindPopup();
-        }
+        private async Task RemovePopup() => await marker1.UnbindPopup();
 
-        private async Task RemoveTooltip()
-        {
-            await this.marker2.UnbindTooltip();
-        }
+        private async Task RemoveTooltip() => await marker2.UnbindTooltip();
 
-        private async Task UpdatePopup()
-        {
-            await this.marker1.SetPopupContent("Popup has changed its content");
-        }
+        private async Task UpdatePopup() => await marker1.SetPopupContent("Popup has changed its content");
 
-        private async Task UpdateTooltip()
-        {
-            await this.marker2.SetTooltipContent("Tooltip has changed its content");
-        }
+        private async Task UpdateTooltip() => await marker2.SetTooltipContent("Tooltip has changed its content");
 
-        private async Task TogglePopup()
-        {
-            await this.marker1.TogglePopup();
-        }
+        private async Task TogglePopup() => await marker1.TogglePopup();
 
-        private async Task ToggleTooltip()
-        {
-            await this.marker2.ToggleTooltip();
-        }
+        private async Task ToggleTooltip() => await marker2.ToggleTooltip();
     }
 }

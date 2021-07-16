@@ -12,13 +12,13 @@ namespace FisSst.BlazorMaps
         private const string SetRadiusJsFunction = "setRadius";
 
         internal Circle(IJSObjectReference jsReference, IEventedJsInterop eventedJsInterop)
-            : base (jsReference, eventedJsInterop)
+            : base(jsReference, eventedJsInterop)
         {
         }
 
         public async Task<Circle> SetRadius(double radius)
         {
-            await this.JsReference.InvokeAsync<Circle>(SetRadiusJsFunction, radius);
+            await JsReference.InvokeAsync<Circle>(SetRadiusJsFunction, radius);
             return this;
         }
     }

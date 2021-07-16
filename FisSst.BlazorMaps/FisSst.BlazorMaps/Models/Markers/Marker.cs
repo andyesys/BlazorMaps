@@ -23,33 +23,21 @@ namespace FisSst.BlazorMaps
         }
 
         public async Task<LatLng> GetLatLng()
-        {
-            return await this.JsReference.InvokeAsync<LatLng>(GetLatLngJsFunction);
-        }
+            => await JsReference.InvokeAsync<LatLng>(GetLatLngJsFunction);
 
         public async Task<IJSObjectReference> SetLatLng(LatLng latLng)
-        {
-            return await this.JsReference.InvokeAsync<IJSObjectReference>(SetLatLngJsFunction, latLng);
-        }
+            => await JsReference.InvokeAsync<IJSObjectReference>(SetLatLngJsFunction, latLng);
 
         public async Task<IJSObjectReference> SetZIndexOffset(int number)
-        {
-            return await this.JsReference.InvokeAsync<IJSObjectReference>(SetZIndexOffsetJsFunction, number);
-        }
+            => await JsReference.InvokeAsync<IJSObjectReference>(SetZIndexOffsetJsFunction, number);
 
         public async Task<Icon> GetIcon()
-        {
-            return await this.JsReference.InvokeAsync<Icon>(GetIconJsFunction);
-        }
+            => await JsReference.InvokeAsync<Icon>(GetIconJsFunction);
 
         public async Task<IJSObjectReference> SetIcon(Icon icon)
-        {
-            return await this.JsReference.InvokeAsync<IJSObjectReference>(SetIconJsFunction, icon);
-        }
+            => await JsReference.InvokeAsync<IJSObjectReference>(SetIconJsFunction, icon);
 
         public async Task<IJSObjectReference> SetOpacity(int number)
-        {
-            return await this.JsReference.InvokeAsync<IJSObjectReference>(SetOpacityJsFunction, number);
-        }
+            => await JsReference.InvokeAsync<IJSObjectReference>(SetOpacityJsFunction, number);
     }
 }

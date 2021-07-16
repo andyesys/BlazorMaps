@@ -33,21 +33,11 @@ namespace FisSst.BlazorMaps
         [JsonIgnore]
         public Icon IconRef
         {
-            get
-            {
-                return iconRef;
-            }
+            get => iconRef;
             init
             {
                 iconRef = value;
-                if (value != null)
-                {
-                    Icon = iconRef.JsReference;
-                }
-                else
-                {
-                    Icon = null;
-                }
+                Icon = value != null ? iconRef.JsReference : null;
             }
         }
         public IJSObjectReference Icon { get; init; }

@@ -1,6 +1,5 @@
 using FisSst.BlazorMaps.JsInterops.Events;
 using FisSst.BlazorMaps.JsInterops.IconFactories;
-using FisSst.BlazorMaps.JsInterops.Maps;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FisSst.BlazorMaps.DependencyInjection
@@ -27,11 +26,13 @@ namespace FisSst.BlazorMaps.DependencyInjection
             services.AddTransient<ICircleMarkerFactory, CircleMarkerFactory>();
             services.AddTransient<ICircleFactory, CircleFactory>();
             services.AddTransient<ITileLayerFactory, TileLayerFactory>();
+            services.AddTransient<ILayerGroupFactory, LayerGroupFactory>();
         }
 
         private static void AddJsInterops(IServiceCollection services)
         {
             services.AddTransient<IMapJsInterop, MapJsInterop>();
+            services.AddTransient<IBatchingJsInterop, BatchingJsInterop>();
             services.AddTransient<IEventedJsInterop, EventedJsInterop>();
             services.AddTransient<IIconFactoryJsInterop, IconFactoryJsInterop>();
         }

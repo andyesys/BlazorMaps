@@ -20,26 +20,26 @@ namespace FisSst.BlazorMaps
 
         public async Task<CircleMarker> Create(LatLng latLng)
         {
-            IJSObjectReference jsReference = await this.jsRuntime.InvokeAsync<IJSObjectReference>(create, latLng);
-            return new CircleMarker(jsReference, this.eventedJsInterop);
+            var jsReference = await jsRuntime.InvokeAsync<IJSObjectReference>(create, latLng);
+            return new CircleMarker(jsReference, eventedJsInterop);
         }
 
-        public async  Task<CircleMarker> Create(LatLng latLng, CircleMarkerOptions options)
+        public async Task<CircleMarker> Create(LatLng latLng, CircleMarkerOptions options)
         {
-            IJSObjectReference jsReference = await this.jsRuntime.InvokeAsync<IJSObjectReference>(create, latLng, options);
-            return new CircleMarker(jsReference, this.eventedJsInterop);
+            var jsReference = await jsRuntime.InvokeAsync<IJSObjectReference>(create, latLng, options);
+            return new CircleMarker(jsReference, eventedJsInterop);
         }
 
         public async Task<CircleMarker> CreateAndAddToMap(LatLng latLng, Map map)
         {
-            CircleMarker circleMarker = await this.Create(latLng);
+            var circleMarker = await Create(latLng);
             await circleMarker.AddTo(map);
             return circleMarker;
         }
 
         public async Task<CircleMarker> CreateAndAddToMap(LatLng latLng, Map map, CircleMarkerOptions options)
         {
-            CircleMarker circleMarker = await this.Create(latLng, options);
+            var circleMarker = await Create(latLng, options);
             await circleMarker.AddTo(map);
             return circleMarker;
         }

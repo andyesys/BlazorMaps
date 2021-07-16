@@ -16,20 +16,20 @@ namespace FisSst.BlazorMaps.Examples.Pages
         private readonly MatTheme matTheme;
         private Map mapRef;
         private List<Marker> markers = new List<Marker>();
-        private Stopwatch stopwatch = new Stopwatch();
-        private MapOptions mapOptions;
+        private readonly Stopwatch stopwatch = new Stopwatch();
+        private readonly MapOptions mapOptions;
 
         public TestsPage()
         {
-            this.firstLat = 50.24;
-            this.secondLat = 50.30;
-            this.firstLng = 18.62;
-            this.secondLng = 18.75;
-            this.matTheme = new MatTheme()
+            firstLat = 50.24;
+            secondLat = 50.30;
+            firstLng = 18.62;
+            secondLng = 18.75;
+            matTheme = new MatTheme()
             {
                 Primary = "#CBE54E"
             };
-            this.mapOptions = new MapOptions()
+            mapOptions = new MapOptions()
             {
                 DivId = "mapId",
                 Center = new LatLng(50.279133, 18.685578),
@@ -51,35 +51,35 @@ namespace FisSst.BlazorMaps.Examples.Pages
 
         private async Task AddMarkers()
         {
-            List<LatLng> coordinates = GenerateListOfCoordinates();
+            var coordinates = GenerateListOfCoordinates();
 
-            this.stopwatch.Restart();
-            this.stopwatch.Start();
+            stopwatch.Restart();
+            stopwatch.Start();
 
-            for (int i = 0; i < this.NumberOfMarkers; i++)
+            for (var i = 0; i < NumberOfMarkers; i++)
             {
-                Marker marker = await MarkerFactory.CreateAndAddToMap(coordinates[i], this.mapRef);
-                this.markers.Add(marker);
+                var marker = await MarkerFactory.CreateAndAddToMap(coordinates[i], mapRef);
+                markers.Add(marker);
             }
 
-            this.stopwatch.Stop();
+            stopwatch.Stop();
             StateHasChanged();
         }
 
         private void RemoveMarkers()
         {
-            this.stopwatch.Restart();
-            this.stopwatch.Start();
-            this.markers.ForEach(async marker => await marker.Remove());
-            this.stopwatch.Stop();
-            this.markers = new List<Marker>();
+            stopwatch.Restart();
+            stopwatch.Start();
+            markers.ForEach(async marker => await marker.Remove());
+            stopwatch.Stop();
+            markers = new List<Marker>();
             StateHasChanged();
         }
 
         private List<LatLng> GenerateListOfCoordinates()
         {
-            List<LatLng> coordinates = new List<LatLng>();
-            for (int i = 0; i < this.NumberOfMarkers; i++)
+            var coordinates = new List<LatLng>();
+            for (var i = 0; i < NumberOfMarkers; i++)
             {
                 coordinates.Add(GetRandomLatLng());
             }
@@ -89,9 +89,9 @@ namespace FisSst.BlazorMaps.Examples.Pages
 
         private LatLng GetRandomLatLng()
         {
-            Random random = new Random();
-            double lat = random.NextDouble() * (this.secondLat - this.firstLat) + this.firstLat;
-            double lng = random.NextDouble() * (this.secondLng - this.firstLng) + this.firstLng;
+            var random = new Random();
+            var lat = random.NextDouble() * (secondLat - firstLat) + firstLat;
+            var lng = random.NextDouble() * (secondLng - firstLng) + firstLng;
             return new LatLng(lat, lng);
         }
     }

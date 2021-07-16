@@ -10,5 +10,6 @@
         public int Zoom { get; set; }
         public string UrlTileLayer { get; set; }
         public TileLayerOptions SubOptions { get; set; }
+        public bool ShowScale { get; set; }
     }
 }

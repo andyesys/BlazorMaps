@@ -11,9 +11,7 @@ namespace FisSst.BlazorMaps
         private readonly IJSRuntime jsRuntime;
         private readonly IEventedJsInterop eventedJsInterop;
 
-        public PolygonFactory(
-            IJSRuntime jsRuntime,
-            IEventedJsInterop eventedJsInterop)
+        public PolygonFactory(IJSRuntime jsRuntime, IEventedJsInterop eventedJsInterop)
         {
             this.jsRuntime = jsRuntime;
             this.eventedJsInterop = eventedJsInterop;
@@ -21,26 +19,19 @@ namespace FisSst.BlazorMaps
 
         public async Task<Polygon> Create(IEnumerable<LatLng> latLngs)
         {
-            IJSObjectReference jsReference = await this.jsRuntime.InvokeAsync<IJSObjectReference>(create, latLngs);
-            return new Polygon(jsReference, this.eventedJsInterop);
+            var jsReference = await jsRuntime.InvokeAsync<IJSObjectReference>(create, latLngs);
+            return new Polygon(jsReference, eventedJsInterop);
         }
 
         public async Task<Polygon> Create(IEnumerable<LatLng> latLngs, PolylineOptions options)
         {
-            IJSObjectReference jsReference = await this.jsRuntime.InvokeAsync<IJSObjectReference>(create, latLngs, options);
-            return new Polygon(jsReference, this.eventedJsInterop);
-        }
-
-        public async Task<Polygon> CreateAndAddToMap(IEnumerable<LatLng> latLngs, Map map)
-        {
-            Polygon polygon = await this.Create(latLngs);
-            await polygon.AddTo(map);
-            return polygon;
+            var jsReference = await jsRuntime.InvokeAsync<IJSObjectReference>(create, latLngs, options);
+            return new Polygon(jsReference, eventedJsInterop);
         }
 
         public async Task<Polygon> CreateAndAddToMap(IEnumerable<LatLng> latLngs, Map map, PolylineOptions options)
         {
-            Polygon polygon = await this.Create(latLngs, options);
+            var polygon = await Create(latLngs, options);
             await polygon.AddTo(map);
             return polygon;
         }

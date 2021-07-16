@@ -7,9 +7,6 @@ namespace FisSst.BlazorMaps
     /// </summary>
     public class Icon : JsReferenceBase
     {
-        internal Icon(IJSObjectReference jsReference)
-        {
-            JsReference = jsReference;
-        }
+        internal Icon(IJSObjectReference jsReference) => JsReference = jsReference;
     }
 }

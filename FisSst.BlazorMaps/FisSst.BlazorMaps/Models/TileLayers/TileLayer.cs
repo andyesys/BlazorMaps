@@ -1,6 +1,4 @@
-﻿using FisSst.BlazorMaps.JsInterops.Events;
-using Microsoft.JSInterop;
-using System.Threading.Tasks;
+﻿using Microsoft.JSInterop;
 
 namespace FisSst.BlazorMaps
 {
@@ -9,9 +7,6 @@ namespace FisSst.BlazorMaps
     /// </summary>
     public class TileLayer : Layer
     {
-        internal TileLayer(IJSObjectReference jsReference)
-        {
-            JsReference = jsReference;
-        }
+        internal TileLayer(IJSObjectReference jsReference) => JsReference = jsReference;
     }
 }

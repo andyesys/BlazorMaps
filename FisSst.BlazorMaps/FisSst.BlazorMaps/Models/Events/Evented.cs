@@ -24,70 +24,56 @@ namespace FisSst.BlazorMaps
         private readonly IDictionary<string, Func<MouseEvent, Task>> MouseEvents = new Dictionary<string, Func<MouseEvent, Task>>();
 
         public async Task OnClick(Func<MouseEvent, Task> callback)
-        {
-            await On(ClickJsFunction, callback);
-        }
+            => await On(ClickJsFunction, callback);
 
         public async Task OnDblClick(Func<MouseEvent, Task> callback)
-        {
-            await On(DblClickJsFunction, callback);
-        }
+            => await On(DblClickJsFunction, callback);
 
         public async Task OnMouseDown(Func<MouseEvent, Task> callback)
-        {
-            await On(MouseDownJsFunction, callback);
-        }
+            => await On(MouseDownJsFunction, callback);
 
         public async Task OnMouseUp(Func<MouseEvent, Task> callback)
-        {
-            await On(MouseUpJsFunction, callback);
-        }
+            => await On(MouseUpJsFunction, callback);
 
         public async Task OnMouseOver(Func<MouseEvent, Task> callback)
-        {
-            await On(MouseOverJsFunction, callback);
-        }
+            => await On(MouseOverJsFunction, callback);
 
         public async Task OnMouseOut(Func<MouseEvent, Task> callback)
-        {
-            await On(MouseOutJsFunction, callback);
-        }
+            => await On(MouseOutJsFunction, callback);
 
         public async Task OnContextMenu(Func<MouseEvent, Task> callback)
-        {
-            await On(ContextMenuJsFunction, callback);
-        }
+            => await On(ContextMenuJsFunction, callback);
 
         private async Task On(string eventType, Func<MouseEvent, Task> callback)
         {
-            if (this.MouseEvents.ContainsKey(eventType))
+            if (MouseEvents.ContainsKey(eventType))
             {
                 return;
             }
 
-            this.MouseEvents.Add(eventType, callback);
-            await this.On(eventType);
+            MouseEvents.Add(eventType, callback);
+            await On(eventType);
         }
 
         private async Task On(string eventType)
         {
-            DotNetObjectReference<Evented> eventedClass = DotNetObjectReference.Create(this);
-            await this.EventedJsInterop.OnCallback(eventedClass, this.JsReference, eventType);
+            var eventedClass = DotNetObjectReference.Create(this);
+            await EventedJsInterop.OnCallback(eventedClass, JsReference, eventType);
         }
 
         public async Task Off(string eventType)
         {
-            if (this.MouseEvents.ContainsKey(eventType))
+            if (MouseEvents.ContainsKey(eventType))
             {
-                this.MouseEvents.Remove(eventType);
-                await this.JsReference.InvokeAsync<IJSObjectReference>(OffJsFunction, eventType);
+                MouseEvents.Remove(eventType);
+                await JsReference.InvokeAsync<IJSObjectReference>(OffJsFunction, eventType);
             }
         }
 
         [JSInvokable]
         public async Task OnCallback(string eventType, MouseEvent mouseEvent)
         {
-            bool isEvented = this.MouseEvents.TryGetValue(eventType, out Func<MouseEvent, Task> callback);
+            var isEvented = MouseEvents.TryGetValue(eventType, out var callback);
             if (isEvented)
             {
                 await callback.Invoke(mouseEvent);

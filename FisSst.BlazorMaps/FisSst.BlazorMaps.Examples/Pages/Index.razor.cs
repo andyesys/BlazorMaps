@@ -8,12 +8,12 @@ namespace FisSst.BlazorMaps.Examples.Pages
     {
         private readonly LatLng center;
         private Map mapRef;
-        private MapOptions mapOptions;
+        private readonly MapOptions mapOptions;
 
         public Index()
         {
-            this.center = new LatLng(50.279133, 18.685578);
-            this.mapOptions = new MapOptions()
+            center = new LatLng(50.279133, 18.685578);
+            mapOptions = new MapOptions()
             {
                 DivId = "mapId",
                 Center = center,
@@ -34,8 +34,8 @@ namespace FisSst.BlazorMaps.Examples.Pages
 
         private async Task GetCenterExample()
         {
-            LatLng center = await this.mapRef.GetCenter();
-            await this.JsRuntime.InvokeAsync<string>("alert", $"Map centered at: Lat: {center.Lat}, Lng: {center.Lng}");
+            var center = await mapRef.GetCenter();
+            await JsRuntime.InvokeAsync<string>("alert", $"Map centered at: Lat: {center.Lat}, Lng: {center.Lng}");
         }
     }
 }

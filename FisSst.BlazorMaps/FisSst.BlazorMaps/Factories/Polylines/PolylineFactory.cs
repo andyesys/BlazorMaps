@@ -21,26 +21,26 @@ namespace FisSst.BlazorMaps
 
         public async Task<Polyline> Create(IEnumerable<LatLng> latLngs)
         {
-            IJSObjectReference jsReference = await this.jsRuntime.InvokeAsync<IJSObjectReference>(create, latLngs);
-            return new Polyline(jsReference, this.eventedJsInterop);
+            var jsReference = await jsRuntime.InvokeAsync<IJSObjectReference>(create, latLngs);
+            return new Polyline(jsReference, eventedJsInterop);
         }
 
-        public async  Task<Polyline> Create(IEnumerable<LatLng> latLngs, PolylineOptions options)
+        public async Task<Polyline> Create(IEnumerable<LatLng> latLngs, PolylineOptions options)
         {
-            IJSObjectReference jsReference = await this.jsRuntime.InvokeAsync<IJSObjectReference>(create, latLngs, options);
-            return new Polyline(jsReference, this.eventedJsInterop);
+            var jsReference = await jsRuntime.InvokeAsync<IJSObjectReference>(create, latLngs, options);
+            return new Polyline(jsReference, eventedJsInterop);
         }
 
         public async Task<Polyline> CreateAndAddToMap(IEnumerable<LatLng> latLngs, Map map)
         {
-            Polyline polyline = await this.Create(latLngs);
+            var polyline = await Create(latLngs);
             await polyline.AddTo(map);
             return polyline;
         }
 
         public async Task<Polyline> CreateAndAddToMap(IEnumerable<LatLng> latLngs, Map map, PolylineOptions options)
         {
-            Polyline polyline = await this.Create(latLngs, options);
+            var polyline = await Create(latLngs, options);
             await polyline.AddTo(map);
             return polyline;
         }

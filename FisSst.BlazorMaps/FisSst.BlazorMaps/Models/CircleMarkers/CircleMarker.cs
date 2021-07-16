@@ -22,30 +22,24 @@ namespace FisSst.BlazorMaps
         }
 
         public async Task<object> ToGeoJSON()
-        {
-            return await this.JsReference.InvokeAsync<object>(ToGeoJSONJsFunction);
-        }
+            => await JsReference.InvokeAsync<object>(ToGeoJSONJsFunction);
 
         public async Task<CircleMarker> SetLatLng(LatLng latLng)
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(SetLatLngJsFunction, latLng);
+            await JsReference.InvokeAsync<IJSObjectReference>(SetLatLngJsFunction, latLng);
             return this;
         }
 
         public async Task<LatLng> GetLatLng()
-        {
-            return await this.JsReference.InvokeAsync<LatLng>(GetLatLngJsFunction);
-        }
+            => await JsReference.InvokeAsync<LatLng>(GetLatLngJsFunction);
 
         public async Task<CircleMarker> SetRadius(LatLng latLng)
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(SetRadiusJsFunction, latLng);
+            await JsReference.InvokeAsync<IJSObjectReference>(SetRadiusJsFunction, latLng);
             return this;
         }
 
         public async Task<double> GetRadius()
-        {
-            return await this.JsReference.InvokeAsync<double>(GetRadiusJsFunction);
-        }
+            => await JsReference.InvokeAsync<double>(GetRadiusJsFunction);
     }
 }

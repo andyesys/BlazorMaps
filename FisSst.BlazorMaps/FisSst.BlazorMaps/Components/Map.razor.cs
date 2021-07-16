@@ -1,10 +1,7 @@
 ﻿using FisSst.BlazorMaps.JsInterops.Events;
-using FisSst.BlazorMaps.JsInterops.Maps;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using System;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace FisSst.BlazorMaps
@@ -50,113 +47,77 @@ namespace FisSst.BlazorMaps
         {
             if (firstRender)
             {
-                this.MapReference = await this.MapJsInterop.Initialize(this.MapOptions);
-                this.MapEvented = new MapEvented(this.MapReference, this.EventedJsInterop);
-                await this.AfterRender.InvokeAsync();
+                MapReference = await MapJsInterop.Initialize(MapOptions);
+                MapEvented = new MapEvented(MapReference, EventedJsInterop);
+                await AfterRender.InvokeAsync();
             }
         }
 
         public async Task<LatLng> GetCenter()
-        {
-            return await this.MapReference.InvokeAsync<LatLng>(getCenter);
-        }
+            => await MapReference.InvokeAsync<LatLng>(getCenter);
 
         public async Task<int> GetZoom()
-        {
-            return await this.MapReference.InvokeAsync<int>(getZoom);
-        }
+            => await MapReference.InvokeAsync<int>(getZoom);
 
         public async Task<int> GetMinZoom()
-        {
-            return await this.MapReference.InvokeAsync<int>(getMinZoom);
-        }
+            => await MapReference.InvokeAsync<int>(getMinZoom);
 
         public async Task<int> GetMaxZoom()
-        {
-            return await this.MapReference.InvokeAsync<int>(getMaxZoom);
-        }
+            => await MapReference.InvokeAsync<int>(getMaxZoom);
 
         public async Task SetView(LatLng latLng, int? zoom = null)
-        {
-            await this.MapReference.InvokeAsync<IJSObjectReference>(setView, latLng, zoom, new { animate = true });
-        }
+            => await MapReference.InvokeAsync<IJSObjectReference>(setView, latLng, zoom, new { animate = true });
 
         public async Task SetZoom(int zoom)
-        {
-            await this.MapReference.InvokeAsync<IJSObjectReference>(setZoom, zoom);
-        }
+            => await MapReference.InvokeAsync<IJSObjectReference>(setZoom, zoom);
 
         public async Task ZoomIn(int zoomDelta)
-        {
-            await this.MapReference.InvokeAsync<IJSObjectReference>(zoomIn, zoomDelta);
-        }
+            => await MapReference.InvokeAsync<IJSObjectReference>(zoomIn, zoomDelta);
 
         public async Task ZoomOut(int zoomDelta)
-        {
-            await this.MapReference.InvokeAsync<IJSObjectReference>(zoomOut, zoomDelta);
-        }
+            => await MapReference.InvokeAsync<IJSObjectReference>(zoomOut, zoomDelta);
 
         public async Task SetZoomAround(LatLng latLng, int zoom)
-        {
-            await this.MapReference.InvokeAsync<IJSObjectReference>(setZoomAround, latLng, zoom);
-        }
+            => await MapReference.InvokeAsync<IJSObjectReference>(setZoomAround, latLng, zoom);
 
         public async Task FitBounds(LatLng[] bounds)
         {
-            IJSObjectReference boundsParam = await this.JsRuntime.InvokeAsync<IJSObjectReference>("L.latLngBounds", bounds);
-            await this.MapReference.InvokeAsync<IJSObjectReference>(fitBounds, boundsParam, new { animate = true });
+            var boundsParam = await JsRuntime.InvokeAsync<IJSObjectReference>("L.latLngBounds", bounds);
+            await MapReference.InvokeAsync<IJSObjectReference>(fitBounds, boundsParam, new { animate = true });
             await boundsParam.DisposeAsync();
         }
 
         public async Task FlyTo(LatLng latLng, int zoom)
-        {
-            await this.MapReference.InvokeAsync<IJSObjectReference>(flyTo, latLng, zoom);
-        }
+            => await MapReference.InvokeAsync<IJSObjectReference>(flyTo, latLng, zoom);
 
         public async Task FlyToBounds(LatLng[] bounds)
         {
-            IJSObjectReference boundsParam = await this.JsRuntime.InvokeAsync<IJSObjectReference>("L.latLngBounds", bounds);
-            await this.MapReference.InvokeAsync<IJSObjectReference>(flyToBounds, boundsParam);
+            var boundsParam = await JsRuntime.InvokeAsync<IJSObjectReference>("L.latLngBounds", bounds);
+            await MapReference.InvokeAsync<IJSObjectReference>(flyToBounds, boundsParam);
             await boundsParam.DisposeAsync();
         }
 
         public async Task OnClick(Func<MouseEvent, Task> callback)
-        {
-            await this.MapEvented.OnClick(callback);
-        }
+            => await MapEvented.OnClick(callback);
         public async Task OnDblClick(Func<MouseEvent, Task> callback)
-        {
-            await this.MapEvented.OnDblClick(callback);
-        }
+            => await MapEvented.OnDblClick(callback);
 
         public async Task OnMouseDown(Func<MouseEvent, Task> callback)
-        {
-            await this.MapEvented.OnMouseDown(callback);
-        }
+            => await MapEvented.OnMouseDown(callback);
 
         public async Task OnMouseUp(Func<MouseEvent, Task> callback)
-        {
-            await this.MapEvented.OnMouseUp(callback);
-        }
+            => await MapEvented.OnMouseUp(callback);
 
         public async Task OnMouseOver(Func<MouseEvent, Task> callback)
-        {
-            await this.MapEvented.OnMouseOver(callback);
-        }
+            => await MapEvented.OnMouseOver(callback);
 
         public async Task OnMouseOut(Func<MouseEvent, Task> callback)
-        {
-            await this.MapEvented.OnMouseOut(callback);
-        }
+            => await MapEvented.OnMouseOut(callback);
 
         public async Task OnContextMenu(Func<MouseEvent, Task> callback)
-        {
-            await this.MapEvented.OnContextMenu(callback);
-        }
+            => await MapEvented.OnContextMenu(callback);
 
         public async Task Off(string eventType)
-        {
-            await this.MapEvented.Off(eventType);
-        }
+            => await MapEvented.Off(eventType);
     }
 }

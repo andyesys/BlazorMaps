@@ -3,11 +3,9 @@
     /// <summary>
     /// Represents coordinates - latitude and longitude.
     /// </summary>
-    public class LatLng 
+    public class LatLng
     {
-        public LatLng()
-        {
-        }
+        public LatLng() { }
 
         public LatLng(double lat, double lng)
         {

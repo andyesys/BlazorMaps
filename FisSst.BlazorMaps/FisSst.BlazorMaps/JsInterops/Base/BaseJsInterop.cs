@@ -9,16 +9,13 @@ namespace FisSst.BlazorMaps.JsInterops.Base
         protected readonly Lazy<Task<IJSObjectReference>> moduleTask;
 
         public BaseJsInterop(IJSRuntime jsRuntime, string jsFilePath)
-        {
-            this.moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-               JsInteropConfig.Import, jsFilePath).AsTask());
-        }
+            => moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(JsInteropConfig.Import, jsFilePath).AsTask());
 
         public async ValueTask DisposeAsync()
         {
-            if (this.moduleTask.IsValueCreated)
+            if (moduleTask.IsValueCreated)
             {
-                IJSObjectReference module = await this.moduleTask.Value;
+                var module = await moduleTask.Value;
                 await module.DisposeAsync();
             }
         }

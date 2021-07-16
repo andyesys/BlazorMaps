@@ -2,22 +2,18 @@
 using Microsoft.JSInterop;
 using System.Threading.Tasks;
 
-namespace FisSst.BlazorMaps.JsInterops.Maps
+namespace FisSst.BlazorMaps
 {
     internal class MapJsInterop : BaseJsInterop, IMapJsInterop
     {
         private static readonly string jsFilePath = $"{JsInteropConfig.BaseJsFolder}{JsInteropConfig.MapFile}";
         private const string initialize = "initialize";
-        
 
-        public MapJsInterop(IJSRuntime jsRuntime) : base(jsRuntime, jsFilePath)
-        {
-
-        }
+        public MapJsInterop(IJSRuntime jsRuntime) : base(jsRuntime, jsFilePath) { }
 
         public async ValueTask<IJSObjectReference> Initialize(MapOptions mapOptions)
         {
-            IJSObjectReference module = await moduleTask.Value;
+            var module = await moduleTask.Value;
             return await module.InvokeAsync<IJSObjectReference>(initialize, mapOptions);
         }
     }

@@ -2,7 +2,7 @@
 using Microsoft.JSInterop;
 using System.Threading.Tasks;
 
-namespace FisSst.BlazorMaps.JsInterops.Maps
+namespace FisSst.BlazorMaps
 {
     internal interface IMapJsInterop : IBaseJsInterop
     {

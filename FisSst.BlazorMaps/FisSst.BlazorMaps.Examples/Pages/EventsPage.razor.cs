@@ -14,12 +14,12 @@ namespace FisSst.BlazorMaps.Examples.Pages
         private Marker marker1;
         private Marker marker2;
         private Marker marker3;
-        private MapOptions mapOptions;
+        private readonly MapOptions mapOptions;
 
         public EventsPage()
         {
-            this.center = new LatLng(50.279133, 18.685578);
-            this.mapOptions = new MapOptions()
+            center = new LatLng(50.279133, 18.685578);
+            mapOptions = new MapOptions()
             {
                 DivId = "mapId",
                 Center = center,
@@ -46,79 +46,74 @@ namespace FisSst.BlazorMaps.Examples.Pages
 
         private async Task AddMarkersToMap()
         {
-            this.marker1 = await this.MarkerFactory.CreateAndAddToMap(new LatLng(50.278133, 18.683578), this.mapRef);
-            this.marker2 = await this.MarkerFactory.CreateAndAddToMap(new LatLng(50.277133, 18.670578), this.mapRef);
-            this.marker3 = await this.MarkerFactory.CreateAndAddToMap(new LatLng(50.255133, 18.66578), this.mapRef);
+            marker1 = await MarkerFactory.CreateAndAddToMap(new LatLng(50.278133, 18.683578), mapRef);
+            marker2 = await MarkerFactory.CreateAndAddToMap(new LatLng(50.277133, 18.670578), mapRef);
+            marker3 = await MarkerFactory.CreateAndAddToMap(new LatLng(50.255133, 18.66578), mapRef);
         }
 
         private async Task HandleMouseEvent(MouseEvent mouseEvent)
-        {
-            await this.JsRuntime.InvokeVoidAsync("alert", $"Event type: {mouseEvent.Type} Lat: {mouseEvent.LatLng.Lat}, Lng: {mouseEvent.LatLng.Lng}");
-        }
+            => await JsRuntime.InvokeVoidAsync("alert", $"Event type: {mouseEvent.Type} Lat: {mouseEvent.LatLng.Lat}, Lng: {mouseEvent.LatLng.Lng}");
 
         private async Task AddPolygonToMap()
         {
-            LatLng FirstLatLng = new LatLng(50.2905456, 18.634743);
-            LatLng SecondLatLng = new LatLng(50.287532, 18.615791);
-            LatLng ThirdLatLng = new LatLng(50.295247, 18.579297);
-            this.polygon = await this.PolygonFactory.CreateAndAddToMap(new List<LatLng> { FirstLatLng, SecondLatLng, ThirdLatLng }, this.mapRef);
-            await this.polygon.OnClick(async (MouseEvent mouseEvent) => await ChangePolygonStyle());
+            var FirstLatLng = new LatLng(50.2905456, 18.634743);
+            var SecondLatLng = new LatLng(50.287532, 18.615791);
+            var ThirdLatLng = new LatLng(50.295247, 18.579297);
+            polygon = await PolygonFactory.CreateAndAddToMap(new List<LatLng> { FirstLatLng, SecondLatLng, ThirdLatLng }, mapRef);
+            await polygon.OnClick(async (MouseEvent mouseEvent) => await ChangePolygonStyle());
         }
 
         private async Task ChangePolygonStyle()
         {
-            PolygonOptions PolygonOptions = new PolygonOptions()
+            var polygonOptions = new PolylineOptions()
             {
+                Fill = true,
                 Weight = 5,
                 Color = "green"
             };
 
-            await this.polygon.SetStyle(PolygonOptions);
+            await polygon.SetStyle(polygonOptions);
         }
 
         private async Task AddCircleToMap()
         {
-            CircleOptions CircleOptionsInit = new CircleOptions()
+            var circleOptionsInit = new CircleOptions()
             {
                 Radius = 300
             };
 
-            this.circle = await this.CircleFactory.CreateAndAddToMap(new LatLng(50.263766, 18.705137), this.mapRef, CircleOptionsInit);
-            await this.circle.OnClick(async (MouseEvent mouseEvent) => await ChangeCircleStyle());
+            circle = await CircleFactory.CreateAndAddToMap(new LatLng(50.263766, 18.705137), mapRef, circleOptionsInit);
+            await circle.OnClick(async (MouseEvent mouseEvent) => await ChangeCircleStyle());
         }
 
         private async Task ChangeCircleStyle()
         {
-            CircleOptions CircleOptions = new CircleOptions()
+            var circleOptions = new CircleOptions()
             {
                 Color = "green"
             };
 
-            await this.circle.SetLatLng(new LatLng(50.283783, 18.724827));
+            await circle.SetLatLng(new LatLng(50.283783, 18.724827));
         }
 
         private async Task AddEventsToMarkers()
         {
-            await this.marker1.OnClick(async (MouseEvent mouseEvent) => await HandleMouseEvent(mouseEvent));
-            await this.marker2.OnContextMenu(async (MouseEvent mouseEvent) => await HandleMouseEvent(mouseEvent));
-            await this.marker3.OnDblClick(async (MouseEvent mouseEvent) => await HandleMouseEvent(mouseEvent));
+            await marker1.OnClick(async (MouseEvent mouseEvent) => await HandleMouseEvent(mouseEvent));
+            await marker2.OnContextMenu(async (MouseEvent mouseEvent) => await HandleMouseEvent(mouseEvent));
+            await marker3.OnDblClick(async (MouseEvent mouseEvent) => await HandleMouseEvent(mouseEvent));
         }
 
         private async Task RemoveEventsFromMarkers()
         {
-            await this.marker1.Off("click");
-            await this.marker2.Off("contextmenu");
-            await this.marker3.Off("dblclick");
+            await marker1.Off("click");
+            await marker2.Off("contextmenu");
+            await marker3.Off("dblclick");
         }
 
         private async Task AddEventsToMap()
-        {
-            await this.mapRef.OnClick(async (MouseEvent mouseEvent) => await HandleMouseEvent(mouseEvent));
-        }
+            => await mapRef.OnClick(async (MouseEvent mouseEvent) => await HandleMouseEvent(mouseEvent));
 
         private async Task RemoveEventsFromMap()
-        {
-            await this.mapRef.Off("click");
-        }
+            => await mapRef.Off("click");
     }
 }

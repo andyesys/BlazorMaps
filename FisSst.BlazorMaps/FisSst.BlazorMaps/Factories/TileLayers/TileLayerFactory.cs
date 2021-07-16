@@ -8,14 +8,11 @@ namespace FisSst.BlazorMaps
         private const string create = "L.tileLayer";
         private readonly IJSRuntime jsRuntime;
 
-        public TileLayerFactory(IJSRuntime jsRuntime)
-        {
-            this.jsRuntime = jsRuntime;
-        }
+        public TileLayerFactory(IJSRuntime jsRuntime) => this.jsRuntime = jsRuntime;
 
         public async Task<TileLayer> Create(string urlTemplate, TileLayerOptions options)
         {
-            IJSObjectReference jsReference = await this.jsRuntime.InvokeAsync<IJSObjectReference>(create, urlTemplate, options);
+            var jsReference = await jsRuntime.InvokeAsync<IJSObjectReference>(create, urlTemplate, options);
             return new TileLayer(jsReference);
         }
     }

@@ -20,13 +20,13 @@ namespace FisSst.BlazorMaps
 
         public async Task<Icon> Create(IconOptions options)
         {
-            IJSObjectReference jsReference = await this.jsRuntime.InvokeAsync<IJSObjectReference>(create, options);
+            var jsReference = await jsRuntime.InvokeAsync<IJSObjectReference>(create, options);
             return new Icon(jsReference);
         }
 
         public async Task<Icon> CreateDefault()
         {
-            IJSObjectReference jsReference = await this.iconFactoryJsInterop.CreateDefaultIcon();
+            var jsReference = await iconFactoryJsInterop.CreateDefaultIcon();
             return new Icon(jsReference);
         }
     }

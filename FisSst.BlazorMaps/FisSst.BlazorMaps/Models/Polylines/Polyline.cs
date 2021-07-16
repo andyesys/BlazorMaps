@@ -23,35 +23,29 @@ namespace FisSst.BlazorMaps
         }
 
         public async Task<object> ToGeoJSON()
-        {
-            return await this.JsReference.InvokeAsync<object>(ToGeoJSONJsFunction);
-        }
+            => await JsReference.InvokeAsync<object>(ToGeoJSONJsFunction);
 
         public async Task<Polyline> SetLatLngs(IEnumerable<LatLng> latLngs)
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(SetLatLngsJsFunction, latLngs);
+            await JsReference.InvokeAsync<IJSObjectReference>(SetLatLngsJsFunction, latLngs);
             return this;
         }
 
         public async Task<bool> IsEmpty()
-        {
-            return await this.JsReference.InvokeAsync<bool>(IsEmptyJsFunction);
-        }
+            => await JsReference.InvokeAsync<bool>(IsEmptyJsFunction);
 
         public async Task<LatLng> GetCenter()
-        {
-            return await this.JsReference.InvokeAsync<LatLng>(GetCenterJsFunction);
-        }
+            => await JsReference.InvokeAsync<LatLng>(GetCenterJsFunction);
 
         public async Task<Polyline> AddLatLng(LatLng latLng)
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(AddLatLngJsFunction, latLng);
+            await JsReference.InvokeAsync<IJSObjectReference>(AddLatLngJsFunction, latLng);
             return this;
         }
 
         public async Task<Polyline> AddLatLng(LatLng latLng, IEnumerable<LatLng> latLngs)
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(AddLatLngJsFunction, latLng, latLngs);
+            await JsReference.InvokeAsync<IJSObjectReference>(AddLatLngJsFunction, latLng, latLngs);
             return this;
         }
     }

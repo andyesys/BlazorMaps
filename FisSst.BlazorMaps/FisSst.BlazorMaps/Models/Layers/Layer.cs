@@ -28,102 +28,98 @@ namespace FisSst.BlazorMaps
 
         public async Task<Layer> AddTo(Map map)
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(AddToJsFunction, map.MapReference);
+            await JsReference.InvokeAsync<IJSObjectReference>(AddToJsFunction, map.MapReference);
             return this;
         }
 
         public async Task<Layer> Remove()
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(RemoveJsFunction);
-            await this.JsReference.DisposeAsync();
+            await JsReference.InvokeAsync<IJSObjectReference>(RemoveJsFunction);
+            await JsReference.DisposeAsync();
             return this;
         }
 
         public async Task<Layer> RemoveFrom(Map map)
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(RemoveFromJsFunction, map.MapReference);
+            await JsReference.InvokeAsync<IJSObjectReference>(RemoveFromJsFunction, map.MapReference);
             return this;
         }
 
         public async Task<Layer> BindPopup(string content)
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(BindPopupJsFunction, content);
+            await JsReference.InvokeAsync<IJSObjectReference>(BindPopupJsFunction, content);
             return this;
         }
 
         public async Task<Layer> UnbindPopup()
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(UnbindPopupJsFunction);
+            await JsReference.InvokeAsync<IJSObjectReference>(UnbindPopupJsFunction);
             return this;
         }
 
         public async Task<Layer> OpenPopup(LatLng? latLng)
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(OpenPopupJsFunction, latLng);
+            await JsReference.InvokeAsync<IJSObjectReference>(OpenPopupJsFunction, latLng);
             return this;
         }
 
         public async Task<Layer> ClosePopup()
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(ClosePopupJsFunction);
+            await JsReference.InvokeAsync<IJSObjectReference>(ClosePopupJsFunction);
             return this;
         }
 
         public async Task<Layer> TogglePopup()
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(TogglePopupJsFunction);
+            await JsReference.InvokeAsync<IJSObjectReference>(TogglePopupJsFunction);
             return this;
         }
 
         public async Task<bool> IsPopupOpen()
-        {
-            return await this.JsReference.InvokeAsync<bool>(IsPopupOpenJsFunction);
-        }
+            => await JsReference.InvokeAsync<bool>(IsPopupOpenJsFunction);
 
         public async Task<Layer> SetPopupContent(string content)
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(SetPopupContentJsFunction, content);
+            await JsReference.InvokeAsync<IJSObjectReference>(SetPopupContentJsFunction, content);
             return this;
         }
 
         public async Task<Layer> BindTooltip(string content)
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(BindTooltipJsFunction, content);
+            await JsReference.InvokeAsync<IJSObjectReference>(BindTooltipJsFunction, content);
             return this;
         }
 
         public async Task<Layer> UnbindTooltip()
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(UnbindTooltipJsFunction);
+            await JsReference.InvokeAsync<IJSObjectReference>(UnbindTooltipJsFunction);
             return this;
         }
 
         public async Task<Layer> OpenTooltip(LatLng? latLng)
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(OpenTooltipJsFunction, latLng);
+            await JsReference.InvokeAsync<IJSObjectReference>(OpenTooltipJsFunction, latLng);
             return this;
         }
 
         public async Task<Layer> CloseTooltip()
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(CloseTooltipJsFunction);
+            await JsReference.InvokeAsync<IJSObjectReference>(CloseTooltipJsFunction);
             return this;
         }
 
         public async Task<Layer> ToggleTooltip()
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(ToggleTooltipJsFunction);
+            await JsReference.InvokeAsync<IJSObjectReference>(ToggleTooltipJsFunction);
             return this;
         }
 
         public async Task<bool> IsTooltipOpen()
-        {
-            return await this.JsReference.InvokeAsync<bool>(IsTooltipOpenJsFunction);
-        }
+            => await JsReference.InvokeAsync<bool>(IsTooltipOpenJsFunction);
 
         public async Task<Layer> SetTooltipContent(string content)
         {
-            await this.JsReference.InvokeAsync<IJSObjectReference>(SetTooltipContentJsFunction, content);
+            await JsReference.InvokeAsync<IJSObjectReference>(SetTooltipContentJsFunction, content);
             return this;
         }
     }

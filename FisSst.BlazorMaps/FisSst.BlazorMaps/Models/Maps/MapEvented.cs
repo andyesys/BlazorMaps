@@ -7,8 +7,8 @@ namespace FisSst.BlazorMaps
     {
         public MapEvented(IJSObjectReference jsReference, IEventedJsInterop eventedJsInterop)
         {
-            this.JsReference = jsReference;
-            this.EventedJsInterop = eventedJsInterop;
+            JsReference = jsReference;
+            EventedJsInterop = eventedJsInterop;
         }
     }
 }

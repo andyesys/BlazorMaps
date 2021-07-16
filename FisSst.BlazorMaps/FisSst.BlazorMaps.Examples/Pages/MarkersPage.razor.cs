@@ -15,16 +15,16 @@ namespace FisSst.BlazorMaps.Examples.Pages
         private Marker marker1;
         private Marker marker2;
         private Marker marker3;
-        private MapOptions mapOptions;
+        private readonly MapOptions mapOptions;
 
         public MarkersPage()
         {
-            this.center = new LatLng(50.279133, 18.685578);
-            this.firstMarkerLatLng = new LatLng(50.284324, 18.664683);
-            this.secondMarkerLatLng = new LatLng(50.285495, 18.691064);
-            this.thirdMarkerLatLng = new LatLng(50.279103, 18.685534);
-            this.markerWithOptionsLatLng = new LatLng(50.273103, 18.684534);
-            this.mapOptions = new MapOptions()
+            center = new LatLng(50.279133, 18.685578);
+            firstMarkerLatLng = new LatLng(50.284324, 18.664683);
+            secondMarkerLatLng = new LatLng(50.285495, 18.691064);
+            thirdMarkerLatLng = new LatLng(50.279103, 18.685534);
+            markerWithOptionsLatLng = new LatLng(50.273103, 18.684534);
+            mapOptions = new MapOptions()
             {
                 DivId = "mapId",
                 Center = center,
@@ -47,21 +47,21 @@ namespace FisSst.BlazorMaps.Examples.Pages
 
         private async Task AddMarkers()
         {
-            this.marker1 = await this.MarkerFactory.CreateAndAddToMap(this.firstMarkerLatLng, this.mapRef);
-            this.marker2 = await this.MarkerFactory.CreateAndAddToMap(this.secondMarkerLatLng, this.mapRef);
-            this.marker3 = await this.MarkerFactory.CreateAndAddToMap(this.thirdMarkerLatLng, this.mapRef);
+            marker1 = await MarkerFactory.CreateAndAddToMap(firstMarkerLatLng, mapRef);
+            marker2 = await MarkerFactory.CreateAndAddToMap(secondMarkerLatLng, mapRef);
+            marker3 = await MarkerFactory.CreateAndAddToMap(thirdMarkerLatLng, mapRef);
         }
 
         private async Task RemoveMarkers()
         {
-            await this.marker1.Remove();
-            await this.marker2.Remove();
-            await this.marker3.Remove();
+            await marker1.Remove();
+            await marker2.Remove();
+            await marker3.Remove();
         }
 
         private async Task AddMarkerWithOptions()
         {
-            IconOptions iconOptions = new IconOptions()
+            var iconOptions = new IconOptions()
             {
                 IconUrl = "http://leafletjs.com/examples/custom-icons/leaf-green.png",
                 IconSize = new Point(38, 95),
@@ -72,19 +72,17 @@ namespace FisSst.BlazorMaps.Examples.Pages
                 PopupAnchor = new Point(-3, -76),
             };
 
-            MarkerOptions markerOptions = new MarkerOptions()
+            var markerOptions = new MarkerOptions()
             {
                 Opacity = 0.5,
                 Draggable = true,
-                IconRef = await this.IconFactory.Create(iconOptions),
+                IconRef = await IconFactory.Create(iconOptions),
             };
 
-            this.markerWithOptions = await this.MarkerFactory.CreateAndAddToMap(this.markerWithOptionsLatLng, this.mapRef, markerOptions);
+            markerWithOptions = await MarkerFactory.CreateAndAddToMap(markerWithOptionsLatLng, mapRef, markerOptions);
         }
 
         private async Task RemoveMarkerWithOptions()
-        {
-            await this.markerWithOptions.Remove();
-        }
+            => await markerWithOptions.Remove();
     }
 }
