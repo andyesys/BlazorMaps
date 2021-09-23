@@ -18,8 +18,11 @@ namespace FisSst.BlazorMaps
         public async Task RemoveLayerIds(long[] layerIds)
             => await batchingJsInterop.RemoveLayerIds(this, layerIds);
 
-        public async Task<long[]> CreateAndAddMarkersBatched(LatLng[] latLngs, MarkerOptions[] options)
-            => await batchingJsInterop.CreateAndAddMarkersBatched(this, latLngs, options);
+        public async Task<long[]> CreateAndAddMarkersBatched(LatLng[] latLngs, MarkerOptions[] options, IconOptions[] iconOptions = null)
+            => await batchingJsInterop.CreateAndAddMarkersBatched(this, latLngs, options, iconOptions);
+
+        public async Task<long[]> CreateAndAddDivMarkersBatched(LatLng[] latLngs, MarkerOptions[] options, DivIconOptions[] iconOptions)
+            => await batchingJsInterop.CreateAndAddDivMarkersBatched(this, latLngs, options, iconOptions);
 
         public async Task<long[]> CreateAndAddPolygonsBatched(LatLng[][] latLngs, PolylineOptions[] options)
             => await batchingJsInterop.CreateAndAddPolygonsBatched(this, latLngs, options);

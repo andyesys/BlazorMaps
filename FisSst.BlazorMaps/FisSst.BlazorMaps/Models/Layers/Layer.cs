@@ -57,7 +57,7 @@ namespace FisSst.BlazorMaps
             return this;
         }
 
-        public async Task<Layer> OpenPopup(LatLng? latLng)
+        public async Task<Layer> OpenPopup(LatLng latLng)
         {
             await JsReference.InvokeAsync<IJSObjectReference>(OpenPopupJsFunction, latLng);
             return this;
@@ -96,7 +96,7 @@ namespace FisSst.BlazorMaps
             return this;
         }
 
-        public async Task<Layer> OpenTooltip(LatLng? latLng)
+        public async Task<Layer> OpenTooltip(LatLng latLng)
         {
             await JsReference.InvokeAsync<IJSObjectReference>(OpenTooltipJsFunction, latLng);
             return this;

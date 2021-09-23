@@ -4,9 +4,22 @@
     }
 }
 
-export function createAndAddMarkersBatched(layerGroup, latLngs, options) {
+export function createAndAddMarkersBatched(layerGroup, latLngs, options, iconOptions) {
     const results = [];
     for (let i = 0; i < latLngs.length; i++) {
+        if (iconOptions && iconOptions[i])
+            options[i].icon = L.Icon(iconOptions[i]);
+        const marker = L.marker(latLngs[i], options[i]);
+        marker.addTo(layerGroup);
+        results.push(L.stamp(marker));
+    }
+    return results;
+}
+
+export function createAndAddDivMarkersBatched(layerGroup, latLngs, options, iconOptions) {
+    const results = [];
+    for (let i = 0; i < latLngs.length; i++) {
+        options[i].icon = L.divIcon(iconOptions[i]);
         const marker = L.marker(latLngs[i], options[i]);
         marker.addTo(layerGroup);
         results.push(L.stamp(marker));
