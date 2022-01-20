@@ -37,5 +37,17 @@ namespace FisSst.BlazorMaps
             var module = await moduleTask.Value;
             return await module.InvokeAsync<long[]>(createAndAddPolygonsBatched, layer.JsReference, latLngs, options);
         }
+
+        public async ValueTask<long[]> CreateAndAddPolygonsBatched(LayerGroup layer, LatLng[][][] latLngs, PolylineOptions[] options)
+        {
+            var module = await moduleTask.Value;
+            return await module.InvokeAsync<long[]>(createAndAddPolygonsBatched, layer.JsReference, latLngs, options);
+        }
+
+        public async ValueTask<long[]> CreateAndAddPolygonsBatched(LayerGroup layer, LatLng[][][][] latLngs, PolylineOptions[] options)
+        {
+            var module = await moduleTask.Value;
+            return await module.InvokeAsync<long[]>(createAndAddPolygonsBatched, layer.JsReference, latLngs, options);
+        }
     }
 }

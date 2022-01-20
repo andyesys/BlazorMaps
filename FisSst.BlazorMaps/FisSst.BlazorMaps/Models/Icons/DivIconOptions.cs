@@ -5,10 +5,7 @@
     /// </summary>
     public class DivIconOptions : IconOptions
     {
-        public DivIconOptions() : base()
-        {
-            Html = null!;
-        }
+        public DivIconOptions() : base() => Html = null!;
 
         public string Html { get; init; }
     }

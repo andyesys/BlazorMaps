@@ -26,5 +26,11 @@ namespace FisSst.BlazorMaps
 
         public async Task<long[]> CreateAndAddPolygonsBatched(LatLng[][] latLngs, PolylineOptions[] options)
             => await batchingJsInterop.CreateAndAddPolygonsBatched(this, latLngs, options);
+
+        public async Task<long[]> CreateAndAddPolygonsBatched(LatLng[][][] latLngs, PolylineOptions[] options)
+            => await batchingJsInterop.CreateAndAddPolygonsBatched(this, latLngs, options);
+
+        public async Task<long[]> CreateAndAddPolygonsBatched(LatLng[][][][] latLngs, PolylineOptions[] options)
+            => await batchingJsInterop.CreateAndAddPolygonsBatched(this, latLngs, options);
     }
 }
