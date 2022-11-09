@@ -1,11 +1,10 @@
-namespace FisSst.BlazorMaps
+namespace FisSst.BlazorMaps;
+
+/// <summary>
+/// Determines InteractiveLayer's properties.
+/// </summary>
+public class InteractiveLayerOptions : LayerOptions
 {
-    /// <summary>
-    /// Determines InteractiveLayer's properties.
-    /// </summary>
-    public class InteractiveLayerOptions : LayerOptions
-    {
-        public bool Interactive { get; init; }
-        public bool BubblingMouseEvents { get; init; }
-    }
+    public bool Interactive { get; init; }
+    public bool BubblingMouseEvents { get; init; }
 }

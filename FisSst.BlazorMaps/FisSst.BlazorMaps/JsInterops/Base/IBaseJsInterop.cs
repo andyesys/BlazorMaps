@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace FisSst.BlazorMaps.JsInterops.Base
+namespace FisSst.BlazorMaps.JsInterops.Base;
+
+internal interface IBaseJsInterop
 {
-    internal interface IBaseJsInterop
-    {
-        ValueTask DisposeAsync();
-    }
+    ValueTask DisposeAsync();
 }

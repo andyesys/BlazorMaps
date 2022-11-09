@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace FisSst.BlazorMaps
+namespace FisSst.BlazorMaps;
+
+public interface ITileLayerFactory
 {
-    public interface ITileLayerFactory
-    {
-        Task<TileLayer> Create(string urlTemplate, TileLayerOptions options);
-    }
+    Task<TileLayer> Create(string urlTemplate, TileLayerOptions options);
 }

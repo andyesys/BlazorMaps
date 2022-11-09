@@ -2,10 +2,9 @@
 using Microsoft.JSInterop;
 using System.Threading.Tasks;
 
-namespace FisSst.BlazorMaps
+namespace FisSst.BlazorMaps;
+
+internal interface IMapJsInterop : IBaseJsInterop
 {
-    internal interface IMapJsInterop : IBaseJsInterop
-    {
-        ValueTask<IJSObjectReference> Initialize(MapOptions mapOptions);
-    }
+    ValueTask<IJSObjectReference> Initialize(MapOptions mapOptions);
 }
