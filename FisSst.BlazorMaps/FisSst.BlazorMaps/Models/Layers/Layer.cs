@@ -32,6 +32,12 @@ public abstract class Layer : Evented
         return this;
     }
 
+    public async Task<Layer> AddTo(LayerGroup layerGroup)
+    {
+        await JsReference.InvokeAsync<IJSObjectReference>(AddToJsFunction, layerGroup.JsReference);
+        return this;
+    }
+
     public async Task<Layer> Remove()
     {
         await JsReference.InvokeAsync<IJSObjectReference>(RemoveJsFunction);
@@ -42,6 +48,12 @@ public abstract class Layer : Evented
     public async Task<Layer> RemoveFrom(Map map)
     {
         await JsReference.InvokeAsync<IJSObjectReference>(RemoveFromJsFunction, map.MapReference);
+        return this;
+    }
+
+    public async Task<Layer> RemoveFrom(LayerGroup layerGroup)
+    {
+        await JsReference.InvokeAsync<IJSObjectReference>(RemoveFromJsFunction, layerGroup.JsReference);
         return this;
     }
 
