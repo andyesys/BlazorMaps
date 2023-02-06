@@ -28,7 +28,7 @@ internal class MarkerFactory : IMarkerFactory
         return new Marker(jsReference, eventedJsInterop);
     }
 
-    public async Task<Marker> CreateAndAddToMap(LatLng latLng, Map map, MarkerOptions options)
+    public async Task<Marker> CreateAndAddToMap(LatLng latLng, Map map, MarkerOptions options = null)
     {
         var marker = await Create(latLng, options);
         await marker.AddTo(map);

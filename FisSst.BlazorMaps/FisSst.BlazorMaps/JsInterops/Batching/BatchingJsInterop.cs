@@ -20,7 +20,7 @@ internal class BatchingJsInterop : BaseJsInterop, IBatchingJsInterop
         await module.InvokeVoidAsync(removeLayerIds, layer.JsReference, layerIds);
     }
 
-    public async ValueTask<long[]> CreateAndAddMarkersBatched(LayerGroup layer, LatLng[] latLngs, MarkerOptions[] options, IconOptions[] iconOptions)
+    public async ValueTask<long[]> CreateAndAddMarkersBatched(LayerGroup layer, LatLng[] latLngs, MarkerOptions[] options, IconOptions[] iconOptions = null)
     {
         var module = await moduleTask.Value;
         return await module.InvokeAsync<long[]>(createAndAddMarkersBatched, layer.JsReference, latLngs, options, iconOptions);

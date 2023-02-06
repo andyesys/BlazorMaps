@@ -21,9 +21,12 @@ public class LayerGroup : Layer
 
     public async Task<long[]> CreateAndAddDivMarkersBatched(LatLng[] latLngs, MarkerOptions[] options, DivIconOptions[] iconOptions) => await batchingJsInterop.CreateAndAddDivMarkersBatched(this, latLngs, options, iconOptions);
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Blocker Code Smell", "S2368:Public methods should not have multidimensional array parameters", Justification = "JS API requires multidimensional array parameters")]
     public async Task<long[]> CreateAndAddPolygonsBatched(LatLng[][] latLngs, PolylineOptions[] options) => await batchingJsInterop.CreateAndAddPolygonsBatched(this, latLngs, options);
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Blocker Code Smell", "S2368:Public methods should not have multidimensional array parameters", Justification = "JS API requires multidimensional array parameters")]
     public async Task<long[]> CreateAndAddPolygonsBatched(LatLng[][][] latLngs, PolylineOptions[] options) => await batchingJsInterop.CreateAndAddPolygonsBatched(this, latLngs, options);
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Blocker Code Smell", "S2368:Public methods should not have multidimensional array parameters", Justification = "JS API requires multidimensional array parameters")]
     public async Task<long[]> CreateAndAddPolygonsBatched(LatLng[][][][] latLngs, PolylineOptions[] options) => await batchingJsInterop.CreateAndAddPolygonsBatched(this, latLngs, options);
 }

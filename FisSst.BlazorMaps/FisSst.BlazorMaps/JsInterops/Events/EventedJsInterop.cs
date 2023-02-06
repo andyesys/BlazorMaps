@@ -11,9 +11,9 @@ internal class EventedJsInterop : BaseJsInterop, IEventedJsInterop
 
     public EventedJsInterop(IJSRuntime jsRuntime) : base(jsRuntime, jsFilePath) { }
 
-    public async ValueTask OnCallback(DotNetObjectReference<Evented> eventedClass, IJSObjectReference evented, string eventType)
+    public async ValueTask OnCallback(DotNetObjectReference<Evented> eventedClass, IJSObjectReference eventedReference, string eventType)
     {
         var module = await moduleTask.Value;
-        await module.InvokeVoidAsync(onCallback, eventedClass, evented, eventType);
+        await module.InvokeVoidAsync(onCallback, eventedClass, eventedReference, eventType);
     }
 }

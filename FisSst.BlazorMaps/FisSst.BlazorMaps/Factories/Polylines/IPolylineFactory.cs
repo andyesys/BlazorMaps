@@ -8,8 +8,8 @@ namespace FisSst.BlazorMaps;
 /// </summary>
 public interface IPolylineFactory
 {
-    Task<Polyline> Create(IEnumerable<LatLng> latLng);
-    Task<Polyline> Create(IEnumerable<LatLng> latLng, PolylineOptions options);
-    Task<Polyline> CreateAndAddToMap(IEnumerable<LatLng> latLng, Map map);
-    Task<Polyline> CreateAndAddToMap(IEnumerable<LatLng> latLng, Map map, PolylineOptions options);
+    Task<Polyline> Create(IEnumerable<LatLng> latLngs);
+    Task<Polyline> Create(IEnumerable<LatLng> latLngs, PolylineOptions options);
+    Task<Polyline> CreateAndAddToMap(IEnumerable<LatLng> latLngs, Map map);
+    Task<Polyline> CreateAndAddToMap(IEnumerable<LatLng> latLngs, Map map, PolylineOptions options);
 }

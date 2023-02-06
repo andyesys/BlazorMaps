@@ -29,7 +29,7 @@ internal class PolygonFactory : IPolygonFactory
         return new Polygon(jsReference, eventedJsInterop);
     }
 
-    public async Task<Polygon> CreateAndAddToMap(IEnumerable<LatLng> latLngs, Map map, PolylineOptions options)
+    public async Task<Polygon> CreateAndAddToMap(IEnumerable<LatLng> latLngs, Map map, PolylineOptions options = null)
     {
         var polygon = await Create(latLngs, options);
         await polygon.AddTo(map);
