@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace FisSst.BlazorMaps;
 
@@ -10,4 +10,5 @@ internal interface IBatchingJsInterop
     ValueTask<long[]> CreateAndAddPolygonsBatched(LayerGroup layer, LatLng[][][] latLngs, PolylineOptions[] options);
     ValueTask<long[]> CreateAndAddPolygonsBatched(LayerGroup layer, LatLng[][][][] latLngs, PolylineOptions[] options);
     ValueTask RemoveLayerIds(LayerGroup layer, long[] layerIds);
+    ValueTask BindTooltipBatched(LayerGroup layer, long[] ids, string[] tooltips);
 }

@@ -1,4 +1,4 @@
-﻿using FisSst.BlazorMaps.JsInterops.Base;
+using FisSst.BlazorMaps.JsInterops.Base;
 using Microsoft.JSInterop;
 using System.Threading.Tasks;
 
@@ -11,6 +11,7 @@ internal class BatchingJsInterop : BaseJsInterop, IBatchingJsInterop
     private const string createAndAddMarkersBatched = nameof(createAndAddMarkersBatched);
     private const string createAndAddDivMarkersBatched = nameof(createAndAddDivMarkersBatched);
     private const string createAndAddPolygonsBatched = nameof(createAndAddPolygonsBatched);
+    private const string bindTooltipBatched = nameof(bindTooltipBatched);
 
     public BatchingJsInterop(IJSRuntime jsRuntime) : base(jsRuntime, jsFilePath) { }
 
@@ -48,5 +49,11 @@ internal class BatchingJsInterop : BaseJsInterop, IBatchingJsInterop
     {
         var module = await moduleTask.Value;
         return await module.InvokeAsync<long[]>(createAndAddPolygonsBatched, layer.JsReference, latLngs, options);
+    }
+
+    public async ValueTask BindTooltipBatched(LayerGroup layer, long[] ids, string[] tooltips)
+    {
+        var module = await moduleTask.Value;
+        await module.InvokeVoidAsync(bindTooltipBatched, layer.JsReference, ids, tooltips);
     }
 }

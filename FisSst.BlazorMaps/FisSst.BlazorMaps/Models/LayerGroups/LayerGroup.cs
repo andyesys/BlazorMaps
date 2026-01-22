@@ -1,4 +1,4 @@
-﻿using FisSst.BlazorMaps.JsInterops.Events;
+using FisSst.BlazorMaps.JsInterops.Events;
 using Microsoft.JSInterop;
 using System.Threading.Tasks;
 
@@ -29,4 +29,6 @@ public class LayerGroup : Layer
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Blocker Code Smell", "S2368:Public methods should not have multidimensional array parameters", Justification = "JS API requires multidimensional array parameters")]
     public async Task<long[]> CreateAndAddPolygonsBatched(LatLng[][][][] latLngs, PolylineOptions[] options) => await batchingJsInterop.CreateAndAddPolygonsBatched(this, latLngs, options);
+
+    public async Task BindTooltipBatched(long[] ids, string[] tooltips) => await batchingJsInterop.BindTooltipBatched(this, ids, tooltips);
 }

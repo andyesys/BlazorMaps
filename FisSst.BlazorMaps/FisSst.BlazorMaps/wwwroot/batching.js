@@ -1,4 +1,4 @@
-﻿export function removeLayerIds(layerGroup, ids) {
+export function removeLayerIds(layerGroup, ids) {
     for (let i = 0; i < ids.length; i++) {
         layerGroup.removeLayer(ids[i]);
     }
@@ -35,4 +35,13 @@ export function createAndAddPolygonsBatched(layerGroup, latLngs, options) {
         results.push(L.stamp(polygon));
     }
     return results;
+}
+
+export function bindTooltipBatched(layerGroup, ids, tooltips) {
+    for (let i = 0; i < ids.length; i++) {
+        const layer = layerGroup.getLayer(ids[i]);
+        if (layer) {
+            layer.bindTooltip(tooltips[i]);
+        }
+    }
 }
