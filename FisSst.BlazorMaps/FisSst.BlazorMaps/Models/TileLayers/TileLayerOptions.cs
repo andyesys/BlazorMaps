@@ -8,4 +8,5 @@ public class TileLayerOptions
     public int TileSize { get; set; }
     public int ZoomOffset { get; set; }
     public string AccessToken { get; set; }
+    public string ErrorTileUrl { get; set; }
 }
